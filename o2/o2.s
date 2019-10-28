@@ -6,13 +6,11 @@
 
 .text
 	.global Start
-	
+
 
 
 Start:
 	// Fra basen vil eg sette opp SYSTICK-registrene
-
-
 
 	ldr r0, = FREQUENCY/10
 	ldr r1, =SYSTICK_BASE + SYSTICK_LOAD
@@ -59,7 +57,7 @@ SysTick_Handler:
 	bne Seconds
 	ldr r3, =0
 
-//Legger til ein i minutes
+//Legger til ein i minutes og endrer lagrer verdien
 	ldr r5, =minutes
 	ldr r6, [r5]
 	add r6, #1
@@ -68,16 +66,14 @@ SysTick_Handler:
 
 
 Seconds:
-	str r3, [r2]
+	str r3, [r2]	//Lagrer den nye verdien in seconds
 
 Tenths:
-	#Setter opp slik at det blir plusset på ein i tenths-registeret
-	str r1, [r0]
+	str r1, [r0] //lagrer den nye verdien i tenths
 	bx lr
 
 
 
 
 
-NOP // Behold denne på bunnen av fila
-
+NOP
